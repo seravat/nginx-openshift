@@ -1,0 +1,90 @@
+
+ISSUE:
+We cannot get business central to create a project because it fails when creating the project using a maven archetype due to connection issues.
+
+We have tried so far:
+
+- Using the Maven Mirror template parameters: did not work
+- Using the Maven Mirror template parameters also with the Maven username and Password template parameters: does not quite work because
+the maven settings.xml 
+
+http://maven.apache.org/guides/mini/guide-repository-ssl.html
+
+https://stackoverflow.com/questions/25911623/problems-using-maven-and-ssl-behind-proxy
+
+https://stackoverflow.com/questions/25911623/problems-using-maven-and-ssl-behind-proxy
+
+https://access.redhat.com/solutions/4116981
+
+https://access.redhat.com/solutions?title=pam+maven&product=All&category=All&state=All&kcs_state=All&language=All&field_internal_tags_tid=All
+
+<servers>
+    <server>
+        <id>mirror.default</id>
+        <username>...</username>
+        <password>...</password>
+    </server>
+</servers>
+
+...
+
+<mirrors>
+    <mirror>
+        <id>mirror.default</id>
+        <name>...</name>
+        <url>...</url>
+        <mirrorOf>*</mirrorOf>
+    </mirror>
+</mirrors>
+
+user 185
+
+mvn dependency:get -Dartifact=org.messaginghub:pooled-jms:1.0.4.redhat-00004
+
+mvn dependency:get -Dartifact=org.messaginghub:pooled-jms:1.1.1
+
+
+from Malcolm Shamwana to Everyone:    2:57  PM
+<mirrors>
+    <mirror>
+      <id>spen</id>
+      <mirrorOf>*</mirrorOf>
+      <name>SP Energy Networks Maven Group</name>
+      <url>https://spartifact.euro.iberdrola.local/repository/</url>
+    </mirror>
+</mirrors>
+from Joao Tavares to Everyone:    2:59  PM
+https://help.sonatype.com/learning/repository-manager-3/first-time-installation-and-setup/lesson-2%3A-proxy-and-hosted-maven-repositories
+from Joao Tavares to Everyone:    3:02  PM
+https://blog.sonatype.com/using-nexus-3-as-your-repository-part-1-maven-artifacts
+from Malcolm Shamwana to Everyone:    3:05  PM
+<mirrors>
+    <mirror>
+      <id>spen</id>
+      <mirrorOf>*</mirrorOf>
+      <name>SP Energy Networks Maven Group</name>
+      <url>https://spartifact.euro.iberdrola.local/repository/redhat-maven-ga/</url>
+    </mirror>
+</mirrors>
+from Malcolm Shamwana to Everyone:    3:06  PM
+Downloading from spen: https://spartifact.euro.iberdrola.local/repository/redhat-maven-ga/org/apache/maven/plugins/maven-dependency-plugin/2.8/maven-dependency-plugin-2.8.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-dependency-plugin:2.8: Plugin org.apache.maven.plugins:maven-dependency-plugin:2.8 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-dependency-plugin:jar:2.8
+from Joao Tavares to Everyone:    3:07  PM
+mvn dependency:get -Dartifact=org.messaginghub:pooled-jms:1.0.4.redhat-00004
+from Joao Tavares to Everyone:    3:08  PM
+mvn dependency:get -Dartifact=org.messaginghub:pooled-jms:1.1.1
+from Malcolm Shamwana to Everyone:    3:10  PM
+ Could not transfer metadata org.apache.maven.plugins/maven-metadata.xml from/to spen (https://spartifact.euro.iberdrola.local/repository/maven-central/): sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+from Malcolm Shamwana to Everyone:    3:10  PM
+[DEBUG] Using transporter WagonTransporter with priority -1.0 for https://spartifact.euro.iberdrola.local/repository/maven-central/
+[DEBUG] Using connector BasicRepositoryConnector with priority 0.0 for https://spartifact.euro.iberdrola.local/repository/maven-central/ with username=ae832704, password=***
+
+
+POSSIBLE SOLUTIONS:
+
+from Joao Tavares to Everyone:    3:30  PM
+https://stackoverflow.com/questions/25911623/problems-using-maven-and-ssl-behind-proxy
+from Joao Tavares to Everyone:    3:32  PM
+https://stackoverflow.com/questions/45612814/maven-error-pkix-path-building-failed-unable-to-find-valid-certification-path
+
+
